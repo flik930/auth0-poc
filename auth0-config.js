@@ -20,8 +20,19 @@
  */
 
 // Automatically detect the environment and set the appropriate base URL
-var isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+var isLocalhost = window.location.hostname === 'localhost' ||
+                  window.location.hostname === '127.0.0.1' ||
+                  window.location.hostname === '';
 var baseUrl = isLocalhost ? 'http://localhost:3000' : 'https://auth0-poc.vercel.app';
+
+// Log detected environment for debugging
+console.log('[Auth0 Config] Environment detected:', {
+    hostname: window.location.hostname,
+    isLocalhost: isLocalhost,
+    baseUrl: baseUrl,
+    redirectUri: baseUrl + '/#!/callback',
+    logoutReturnTo: baseUrl
+});
 
 window.AUTH0_CONFIG = {
     // Your Auth0 domain (e.g., 'your-tenant.auth0.com' or 'your-tenant.us.auth0.com')
