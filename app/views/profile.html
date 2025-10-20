@@ -1,0 +1,74 @@
+<div class="profile-card">
+    <h2>User Profile</h2>
+    <hr>
+
+    <div ng-if="vm.profile" class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <img ng-src="{{ vm.profile.picture }}" alt="Profile Picture"
+                         class="rounded-circle img-fluid" style="max-width: 150px;">
+                </div>
+                <div class="col-md-9">
+                    <h4>{{ vm.profile.name }}</h4>
+                    <p class="text-muted">{{ vm.profile.email }}</p>
+
+                    <h5 class="mt-4">Profile Information</h5>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td><strong>Name:</strong></td>
+                                <td>{{ vm.profile.name }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Email:</strong></td>
+                                <td>{{ vm.profile.email }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Email Verified:</strong></td>
+                                <td>
+                                    <span ng-if="vm.profile.email_verified" class="badge bg-success">Yes</span>
+                                    <span ng-if="!vm.profile.email_verified" class="badge bg-warning">No</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Nickname:</strong></td>
+                                <td>{{ vm.profile.nickname }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>User ID (sub):</strong></td>
+                                <td><code>{{ vm.profile.sub }}</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Last Updated:</strong></td>
+                                <td>{{ vm.profile.updated_at | date:'medium' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5 class="mt-4">Tokens (For Demo Purposes Only)</h5>
+                    <div class="alert alert-warning" role="alert">
+                        <small><strong>Warning:</strong> In production, never expose tokens in the UI. This is for demonstration only.</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Access Token:</strong></label>
+                        <textarea class="form-control" rows="3" readonly>{{ vm.accessToken }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label"><strong>ID Token:</strong></label>
+                        <textarea class="form-control" rows="3" readonly>{{ vm.idToken }}</textarea>
+                    </div>
+
+                    <h5 class="mt-4">Full Profile Object (JSON)</h5>
+                    <pre class="bg-light p-3 rounded"><code>{{ vm.profile | json }}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="!vm.profile" class="alert alert-info" role="alert">
+        Loading profile...
+    </div>
+</div>

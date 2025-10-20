@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="auth0App">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth0 AngularJS POC</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            padding-top: 70px;
+        }
+        .jumbotron {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+        .profile-card {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" ng-controller="NavbarController as nav">
+        <div class="container">
+            <a class="navbar-brand" href="#!/">Auth0 AngularJS POC</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!/">Home</a>
+                    </li>
+                    <li class="nav-item" ng-if="nav.auth.isAuthenticated()">
+                        <a class="nav-link" ng-href="{{ nav.getPortalLink() }}">My Portal</a>
+                    </li>
+                    <li class="nav-item" ng-if="nav.auth.isAuthenticated()">
+                        <a class="nav-link" href="#!/profile">Profile</a>
+                    </li>
+                    <li class="nav-item" ng-if="nav.auth.isAuthenticated()">
+                        <span class="nav-link">
+                            <span class="badge bg-primary">{{ nav.getRoleDisplayName() }}</span>
+                        </span>
+                    </li>
+                    <li class="nav-item" ng-if="!nav.auth.isAuthenticated()">
+                        <a class="nav-link" href="javascript:void(0)" ng-click="nav.login()">Login</a>
+                    </li>
+                    <li class="nav-item" ng-if="nav.auth.isAuthenticated()">
+                        <a class="nav-link" href="javascript:void(0)" ng-click="nav.logout()">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div ui-view></div>
+    </div>
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <!-- Angular UI Router -->
+    <script src="https://unpkg.com/@uirouter/angularjs@1.0.30/release/angular-ui-router.min.js"></script>
+
+    <!-- Auth0.js -->
+    <script src="https://cdn.auth0.com/js/auth0/9.23.2/auth0.min.js"></script>
+
+    <!-- Auth0 Callback Handler (MUST run before Angular) -->
+    <script src="auth0-callback-handler.js?v=100001"></script>
+
+    <!-- Auth0 Configuration -->
+    <script src="auth0-config.js?v=99999"></script>
+
+    <!-- Application Files -->
+    <script src="app/app.js?v=3"></script>
+    <script src="app/services/auth.service.js?v=7"></script>
+    <script src="app/services/auth.interceptor.js?v=2"></script>
+    <script src="app/controllers/home.controller.js?v=2"></script>
+    <script src="app/controllers/callback.controller.js?v=2"></script>
+    <script src="app/controllers/profile.controller.js?v=2"></script>
+    <script src="app/controllers/navbar.controller.js?v=2"></script>
+    <script src="app/controllers/axa-portal.controller.js?v=2"></script>
+    <script src="app/controllers/broker-portal.controller.js?v=2"></script>
+    <script src="app/controllers/customer-portal.controller.js?v=2"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

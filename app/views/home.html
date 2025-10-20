@@ -1,0 +1,44 @@
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to Auth0 AngularJS POC</h1>
+    <p class="lead">This is a demonstration of Auth0 Universal Login integration with AngularJS</p>
+    <hr class="my-4">
+
+    <div ng-if="!vm.auth.isAuthenticated()">
+        <p>You are not logged in. Click the button below to authenticate using Auth0 Universal Login.</p>
+        <button class="btn btn-primary btn-lg" ng-click="vm.login()">
+            <i class="bi bi-box-arrow-in-right"></i> Log In
+        </button>
+    </div>
+
+    <div ng-if="vm.auth.isAuthenticated()">
+        <p class="text-success">You are logged in!</p>
+        <a href="#!/profile" class="btn btn-success btn-lg">View Profile</a>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Universal Login</h5>
+                <p class="card-text">Uses Auth0's hosted login page for secure authentication.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Protected Routes</h5>
+                <p class="card-text">Routes are protected using UI Router resolve guards.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Token Management</h5>
+                <p class="card-text">Automatic token handling with HTTP interceptors.</p>
+            </div>
+        </div>
+    </div>
+</div>

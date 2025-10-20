@@ -1,0 +1,19 @@
+{
+  "name": "auth0-angularjs-poc",
+  "version": "1.0.0",
+  "description": "Auth0 Universal Login POC with AngularJS",
+  "scripts": {
+    "start": "http-server -p 3000 -o"
+  },
+  "keywords": [
+    "auth0",
+    "angularjs",
+    "authentication",
+    "universal-login"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
