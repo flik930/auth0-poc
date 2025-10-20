@@ -305,22 +305,6 @@
             var currentTime = new Date().getTime();
             var isAuth = currentTime < expiresAt;
 
-            // Detailed logging when NOT authenticated to debug why
-            if (!isAuth) {
-                console.warn('[AuthService] ⚠️ isAuthenticated() returning FALSE:', {
-                    currentTime: currentTime,
-                    currentTimeReadable: new Date(currentTime).toISOString(),
-                    expiresAt: expiresAt,
-                    expiresAtReadable: expiresAt > 0 ? new Date(expiresAt).toISOString() : 'NEVER SET',
-                    expiresAtString: expiresAtString,
-                    hasAccessToken: !!$window.localStorage.getItem('access_token'),
-                    hasIdToken: !!$window.localStorage.getItem('id_token'),
-                    timeDifference: expiresAt - currentTime,
-                    expired: expiresAt > 0 && expiresAt < currentTime,
-                    neverSet: expiresAt === 0
-                });
-            }
-
             return isAuth;
         }
 
