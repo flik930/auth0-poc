@@ -23,3 +23,6 @@ npm-debug.log*
 # Auth0 config with credentials (if you create a separate config file)
 # Uncomment the line below if you move Auth0 config to a separate gitignored file
 # auth0-config.js
+
+# Vercel
+.vercel
