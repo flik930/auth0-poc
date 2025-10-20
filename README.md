@@ -11,6 +11,8 @@ The application is complete and fully functional. Users can:
 - ✅ View their profile with user information
 - ✅ Logout from both the app and Auth0
 
+**Live Demo:** [https://auth0-poc.vercel.app](https://auth0-poc.vercel.app/#!/)
+
 **Quick Start:** See the setup instructions below to get started in 5 minutes!
 
 ## Features
@@ -91,21 +93,24 @@ npm install
      - **Client ID** (e.g., `abc123...`)
 
 4. **Configure Callback URLs**:
-   In the same Settings tab, configure these URLs:
+   In the same Settings tab, configure these URLs (one per line):
 
    - **Allowed Callback URLs**:
      ```
      http://localhost:3000/#!/callback
+     https://auth0-poc.vercel.app/#!/callback
      ```
 
    - **Allowed Logout URLs**:
      ```
      http://localhost:3000
+     https://auth0-poc.vercel.app
      ```
 
    - **Allowed Web Origins**:
      ```
      http://localhost:3000
+     https://auth0-poc.vercel.app
      ```
 
    - Click **Save Changes** at the bottom
@@ -116,16 +121,22 @@ npm install
 
 2. Replace the placeholder values with your Auth0 credentials:
    ```javascript
+   // The configuration now auto-detects the environment
+   // It will use localhost:3000 for local development
+   // and auth0-poc.vercel.app for production
+
    window.AUTH0_CONFIG = {
        domain: 'your-tenant.auth0.com',        // Replace with your Auth0 domain
        clientId: 'YOUR_CLIENT_ID',              // Replace with your Client ID
-       redirectUri: 'http://localhost:3000/#!/callback',
-       logoutReturnTo: 'http://localhost:3000',
+       redirectUri: baseUrl + '/#!/callback',   // Auto-detected
+       logoutReturnTo: baseUrl,                 // Auto-detected
        audience: '',  // Optional: Add your API identifier if you have one
        scope: 'openid profile email',
        responseType: 'token id_token'
    };
    ```
+
+**Note:** The configuration automatically detects whether you're running locally or in production and uses the appropriate URLs.
 
 ### Step 4: Run the Application
 
@@ -350,6 +361,36 @@ For production, consider moving sensitive configuration to environment variables
 - [Auth0.js SDK Documentation](https://auth0.com/docs/libraries/auth0js)
 - [AngularJS Documentation](https://docs.angularjs.org/)
 - [Angular UI Router](https://ui-router.github.io/ng1/)
+
+## Deployment
+
+### Deploying to Vercel
+
+This project is deployed to Vercel at: [https://auth0-poc.vercel.app](https://auth0-poc.vercel.app/#!/)
+
+**To deploy your own copy:**
+
+1. **Push your code to GitHub** (already done)
+
+2. **Import to Vercel**:
+   - Go to [vercel.com](https://vercel.com/)
+   - Click "New Project"
+   - Import your GitHub repository
+   - Click "Deploy"
+
+3. **Update Auth0 Dashboard**:
+   - Add your Vercel URL to the Auth0 configuration:
+     - Allowed Callback URLs: `https://your-app.vercel.app/#!/callback`
+     - Allowed Logout URLs: `https://your-app.vercel.app`
+     - Allowed Web Origins: `https://your-app.vercel.app`
+
+4. **Update `auth0-config.js`**:
+   - Change the production URL in the `baseUrl` variable:
+     ```javascript
+     var baseUrl = isLocalhost ? 'http://localhost:3000' : 'https://your-app.vercel.app';
+     ```
+
+**Note:** The app automatically detects whether it's running locally or in production and uses the appropriate Auth0 callback URLs.
 
 ## Next Steps
 
